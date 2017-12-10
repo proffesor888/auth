@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap';
+import {firebaseApp} from '../firebase';
 
 class User extends Component {
     constructor(props) {
       super(props);
     }
+    out() {
+      firebaseApp.auth().signOut();
+    }
     render() {
       return (
-        <div>User</div>
+        <div>
+          <Button onClick={()=> this.out()}>Sign out</Button>
+        </div>
       )
     }
   }
