@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
 import {firebaseApp} from '../firebase';
+import {applyMiddleware, createStore} from 'redux';
+import logger from 'redux-logger';
 import {connect} from 'react-redux';
-import {createUserAction} from '../actions/actions';
+import {UserObj} from '../reducers/reducers';
+import {createUser} from '../actions/actions';
 
 class Reg extends Component {
     constructor(props) {
@@ -18,10 +21,15 @@ class Reg extends Component {
     register() {
       const {email, password} = this.state;
       firebaseApp.auth().createUserWithEmailAndPassword(email,password)
+      .then(data => {
+        let store = createStore(UserObj,applyMiddleware(logger));
+        store.dispatch(createUser(data));
+        console.log(store);
+      })
       .catch(error => {
         this.setState({error: error.message});
       })
-      console.log(this.props);
+      
     }
     render() {
       return (
@@ -51,4 +59,4 @@ class Reg extends Component {
    }
  }
   
-  export default connect(mapStateToProps, {createUserAction})(Reg);
+  export default connect(mapStateToProps, {createUser})(Reg);
