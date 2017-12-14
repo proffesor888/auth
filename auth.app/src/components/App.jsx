@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
 import {Link} from 'react-router';
+import store from '../store';
+import {UsersMas} from '../reducers/reducers';
+import {connect} from 'react-redux';
+import {createUser} from '../actions/actions';
 import User from '../components/user';
 import Reg from '../components/reg';
 import Form from '../components/form';
@@ -19,7 +23,10 @@ class App extends Component {
   signIn(){
     const email = this.state.login;
     const password = this.state.password;
-    firebaseApp.auth().createUserWithEmailAndPassword(email,password)
+    firebaseApp.auth().signInWithEmailAndPassword(email,password)
+    .then(data => {
+      this.props.createUser(data);
+    })
     .catch((error) => {
       this.setState({error: error.message});
     })
@@ -43,4 +50,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    state
+  }
+}
+
+export default connect(mapStateToProps, {createUser})(App);
