@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
 import {firebaseApp} from '../firebase';
-import store from '../store';
-import {applyMiddleware, createStore} from 'redux';
-import logger from 'redux-logger';
 import {connect} from 'react-redux';
 import {createUser} from '../actions/actions';
 
@@ -22,7 +19,7 @@ class Reg extends Component {
       const {email, password} = this.state;
       firebaseApp.auth().createUserWithEmailAndPassword(email,password)
       .then(data => {
-        store.dispatch(createUser(data));
+          this.props.createUser(this.state);
         })
       .catch(error => {
         this.setState({error: error.message});

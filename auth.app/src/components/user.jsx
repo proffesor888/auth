@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {Button, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import store from '../store';
-import {getEmail} from '../actions/actions';
 import {firebaseApp, firebaseData} from '../firebase';
 
 class User extends Component {
@@ -18,7 +16,7 @@ class User extends Component {
     subGoal() {
       const goal = this.state.goal;
       const email = this.props.email;
-      console.log(this.props)
+      //console.log(this.props)
       firebaseData.push({goal, email});
     }
     render() {
@@ -37,7 +35,7 @@ class User extends Component {
 
   function mapStateToProps(state) {
    return {
-      email: state
+      email: state.login
     }
   }
   

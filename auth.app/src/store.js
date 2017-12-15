@@ -1,6 +1,6 @@
 import {applyMiddleware, createStore} from 'redux';
-import {UsersMas} from './reducers/reducers';
+import {UserObj} from './reducers/reducers';
 import logger from 'redux-logger';
 
-export default createStore(UsersMas, applyMiddleware(logger));
+export default createStore(UserObj, applyMiddleware(logger));
 

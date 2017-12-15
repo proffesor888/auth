@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {FormControl, FormGroup, ControlLabel, Button} from 'react-bootstrap';
 import {Link} from 'react-router';
-import store from '../store';
-import {UsersMas} from '../reducers/reducers';
 import {connect} from 'react-redux';
-import {createUser} from '../actions/actions';
+import {logUser} from '../actions/actions';
 import User from '../components/user';
 import Reg from '../components/reg';
 import Form from '../components/form';
@@ -15,17 +13,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: '',
+      email: '',
       password: '', 
       error: ''
     }
   }
   signIn(){
-    const email = this.state.login;
-    const password = this.state.password;
+    const {email, password} = this.state;
     firebaseApp.auth().signInWithEmailAndPassword(email,password)
     .then(data => {
-      this.props.createUser(data);
+      console.log(data);
+      this.props.logUser(data);
     })
     .catch((error) => {
       this.setState({error: error.message});
@@ -37,7 +35,7 @@ class App extends Component {
         <form>
           <FormGroup>
             <ControlLabel>Enter Login:</ControlLabel>
-            <FormControl type='text' placeholder='Login' onChange={event => this.setState({login: event.target.value})}></FormControl>
+            <FormControl type='text' placeholder='Login' onChange={event => this.setState({email: event.target.value})}></FormControl>
             <ControlLabel>Enter password:</ControlLabel>
             <FormControl type='password' placeholder='Password' onChange={event => this.setState({password: event.target.value})}></FormControl>
             <Button onClick={()=> this.signIn()}>Sign In</Button>
@@ -52,8 +50,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    state
+    state: state
   }
 }
 
-export default connect(mapStateToProps, {createUser})(App);
+export default connect(mapStateToProps, {logUser})(App);
