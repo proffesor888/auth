@@ -1,4 +1,4 @@
-import {CREATE_USER,LOGIN_USER} from '../constants/constants';
+import {CREATE_USER,LOGIN_USER, ADD_GOAL} from '../constants/constants';
 
 
 /*export const UsersMas = (state=[], action) => {
@@ -27,6 +27,10 @@ export const UserObj = (state={}, action) => {
             password: action.pass
         }
         break;
+        case ADD_GOAL:
+            return (
+                Object.assign({},state, {goal: action.goal})
+            )    
         default:
             return state;
     }

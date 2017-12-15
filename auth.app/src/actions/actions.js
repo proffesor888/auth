@@ -1,4 +1,4 @@
-import {CREATE_USER, LOGIN_USER} from '../constants/constants';
+import {CREATE_USER, LOGIN_USER, ADD_GOAL} from '../constants/constants';
 
 export const createUser = (input) => {
     return {
@@ -13,6 +13,13 @@ export const logUser = (input) => {
         type: LOGIN_USER,
         email: input.email,
         pass: input.pa
+    }
+}
+
+export const addGoal = (input) => {
+    return {
+        type: ADD_GOAL,
+        goal: input
     }
 }
 
