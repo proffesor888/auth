@@ -8,10 +8,19 @@ class GoaList extends Component {
             goal:''
         }
     }
+    showGoals() {
+        let mas = this.props.goal.map((item, index) => {
+            return <div key={index}>{item.goal}</div>
+        });
+        return mas;
+    }
     render() {
+        console.log(this.props)
         return (
             <div>
-                {this.props.goal}
+                <div>
+                    {this.showGoals()}
+                </div>
             </div>
         )
     }
@@ -19,7 +28,7 @@ class GoaList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        goal: state.goal
+        goal: state.UserGoalList
     }
 }
 

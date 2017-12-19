@@ -27,11 +27,32 @@ export const UserObj = (state={}, action) => {
             password: action.pass
         }
         break;
-        case ADD_GOAL:
-            return (
-                Object.assign({},state, {goal: action.goal})
-            )    
+           
         default:
             return state;
+    }
+}
+
+export const UserGoalList = (state = [], action) => {
+    switch (action.type) {
+        case ADD_GOAL:
+        return (
+            [...state,UserGoal({}, action)]
+        )
+        break;
+        default:
+        return state
+    } 
+}
+
+const UserGoal = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_GOAL:
+        return {
+            goal: action.goal
+        }
+        break;
+        default:
+        return state;
     }
 }

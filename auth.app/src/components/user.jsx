@@ -17,9 +17,9 @@ class User extends Component {
     }
     subGoal() {
       const goal = this.state.goal;
-      const email = this.props.email;
+      const email = this.props.email.UserObj.login;
       this.props.addGoal(this.state.goal);
-      //console.log(this.props)
+      console.log(this.props)
       firebaseData.push({goal, email});
       
     }
@@ -40,7 +40,7 @@ class User extends Component {
 
   function mapStateToProps(state) {
    return {
-      email: state.login
+      email: state
     }
   }
   
