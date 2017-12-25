@@ -11,3 +11,4 @@ const config = {
 
 export const firebaseApp = firebase.initializeApp(config);
 export const firebaseData = firebase.database().ref('goal');
+export const firebaseDataComplete = firebase.database().ref('Completed');

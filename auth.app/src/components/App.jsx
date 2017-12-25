@@ -22,7 +22,7 @@ class App extends Component {
     const {email, password} = this.state;
     firebaseApp.auth().signInWithEmailAndPassword(email,password)
     .then(data => {
-      console.log(data);
+      //console.log(data);
       this.props.logUser(data);
     })
     .catch((error) => {

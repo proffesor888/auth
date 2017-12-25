@@ -18,10 +18,10 @@ class User extends Component {
     subGoal() {
       const goal = this.state.goal;
       const email = this.props.email.UserObj.login;
-      this.props.addGoal(this.state.goal);
-      console.log(this.props)
+      //this.props.addGoal(this.state.goal);
+      //console.log(this.props);
       firebaseData.push({goal, email});
-      
+            
     }
     render() {
       return (
@@ -44,4 +44,4 @@ class User extends Component {
     }
   }
   
-  export default connect(mapStateToProps, {addGoal})(User);
+  export default connect(mapStateToProps)(User);

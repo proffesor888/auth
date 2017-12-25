@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button} from 'react-bootstrap';
-import {deleteGoal} from '../actions/actions';
+import {addGoal,deleteGoal} from '../actions/actions';
+import {firebaseData, firebaseDataComplete} from '../firebase';
 
 class GoaList extends Component {
     constructor(props) {
@@ -22,10 +23,21 @@ class GoaList extends Component {
         return mas;
     }
     delete(text) {
+        firebaseDataComplete.push({text});
         this.props.deleteGoal(text);
     }
+    componentDidMount() {
+        firebaseData.on('value', snap => {
+            snap.forEach(goals => {
+                let {goal} = goals.val();
+                let {key} = goals.key;
+                this.props.addGoal(goal);
+            });
+
+        })
+    }
     render() {
-        console.log(this.props)
+        //console.log(this.props)
         return (
             <div>
                 <div>
@@ -42,4 +54,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {deleteGoal})(GoaList);
+export default connect(mapStateToProps, {addGoal,deleteGoal})(GoaList);
