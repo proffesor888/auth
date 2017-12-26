@@ -15,29 +15,34 @@ class GoaList extends Component {
         let mas = this.props.goal.map((item, index) => {
             return (
                 <div key={index}>
-                <h3>{item.goal}</h3>
-                <Button bsStyle='danger' onClick={()=>this.delete(item.goal)}>Delete Goal</Button>
+                <h3>{item.goal.goal} submited by {item.goal.email}</h3>
+                <Button bsStyle='success' onClick={()=>this.complete(item.key)}>Complete Goal</Button>
                 </div>
             )
         });
-        return mas;
+        return mas; 
     }
-    delete(text) {
-        firebaseDataComplete.push({text});
-        this.props.deleteGoal(text);
+    complete(key) {
+        firebaseDataComplete.push({key});
+        this.props.deleteGoal(key);
+        firebaseData.child(key).remove();
     }
     componentDidMount() {
         firebaseData.on('value', snap => {
+            let goal = {};
             snap.forEach(goals => {
-                let {goal} = goals.val();
-                let {key} = goals.key;
+                console.log(goals);
+                goal.value = goals.val();
+                goal.key = goals.key
+                //goal.value = goals.val();
+                //goal.key = goals.key;
                 this.props.addGoal(goal);
-            });
-
+                });
+                
         })
     }
     render() {
-        //console.log(this.props)
+       //console.log(this.props)
         return (
             <div>
                 <div>
@@ -49,6 +54,7 @@ class GoaList extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state.UserGoalList)
     return {
         goal: state.UserGoalList
     }

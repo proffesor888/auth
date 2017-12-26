@@ -1,4 +1,4 @@
-import {CREATE_USER,LOGIN_USER, ADD_GOAL, DELETE_GOAL} from '../constants/constants';
+import {CREATE_USER,LOGIN_USER, ADD_GOAL, COMPLETE_GOAL} from '../constants/constants';
 
 
 /*export const UsersMas = (state=[], action) => {
@@ -40,9 +40,9 @@ export const UserGoalList = (state = [], action) => {
             [...state,UserGoal({}, action)]
         )
         break;
-        case DELETE_GOAL:
+        case COMPLETE_GOAL:
         return (
-            state.filter((goal) => goal.goal!==action.goal)
+            state.filter((goal) => goal.key!==action.goal)
         )
         break;
         default:
@@ -54,7 +54,8 @@ const UserGoal = (state = {}, action) => {
     switch (action.type) {
         case ADD_GOAL:
         return {
-            goal: action.goal
+            goal: action.goal,
+            key: action.key
         }
         break;
         default:

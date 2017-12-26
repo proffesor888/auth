@@ -1,4 +1,4 @@
-import {CREATE_USER, LOGIN_USER, ADD_GOAL, DELETE_GOAL} from '../constants/constants';
+import {CREATE_USER, LOGIN_USER, ADD_GOAL, COMPLETE_GOAL} from '../constants/constants';
 
 export const createUser = (input) => {
     return {
@@ -19,13 +19,14 @@ export const logUser = (input) => {
 export const addGoal = (input) => {
     return {
         type: ADD_GOAL,
-        goal: input
+        goal: input.value,
+        key: input.key
     }
 }
 
 export const deleteGoal = (input) => {
     return {
-        type: DELETE_GOAL,
+        type: COMPLETE_GOAL,
         goal: input
     }
 }
