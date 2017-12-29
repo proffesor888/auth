@@ -21,24 +21,10 @@ class User extends Component {
       //this.props.addGoal(this.state.goal);
       //console.log(this.props);
       firebaseData.push({goal, email});
-      //this.props.addGoal(goal);
+      
 
     }
-    componentDidMount() {
-        firebaseData.on('value', snap => {
-            let goalList = {};
-            snap.forEach(goals => {
-                //console.log(goals);
-                goalList.value = goals.val();
-                goalList.key = goals.key
-                //goal.value = goals.val();
-                //goal.key = goals.key;
-                this.props.addGoal(goalList);
-                });
-            
-        })
-    }
-  
+      
     render() {
       return (
         <div>

@@ -36,9 +36,8 @@ export const UserObj = (state={}, action) => {
 export const UserGoalList = (state = [], action) => {
     switch (action.type) {
         case ADD_GOAL:
-        return (
-            [...state,UserGoal({}, action)]
-        )
+        let {goal} = action;
+        return goal;
         break;
         case COMPLETE_GOAL:
         return (
@@ -50,7 +49,7 @@ export const UserGoalList = (state = [], action) => {
     } 
 }
 
-const UserGoal = (state = {}, action) => {
+/*const UserGoal = (state = {}, action) => {
     switch (action.type) {
         case ADD_GOAL:
         return {
@@ -61,4 +60,4 @@ const UserGoal = (state = {}, action) => {
         default:
         return state;
     }
-}
+} */

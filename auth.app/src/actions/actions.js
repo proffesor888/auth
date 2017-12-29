@@ -19,8 +19,7 @@ export const logUser = (input) => {
 export const addGoal = (input) => {
     return {
         type: ADD_GOAL,
-        goal: input.value,
-        key: input.key
+        goal: input
     }
 }
 
