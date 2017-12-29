@@ -9,33 +9,42 @@ class GoaList extends Component {
         super(props);
         this.state = {
             goal:'',
-            
+                      
         }
     }
-    showGoals() {
-        let mas = this.props.goal.map((item, index) => {
-            return (
-                <div key={index}>
-                <h3>{item.goal.goal}</h3>
-                <Button bsStyle='success' onClick={()=>this.complete(item.key)}>Complete Goal</Button>
-                </div>
-            )
-            return mas;
-        });
-        //this.setState({list: mas}) 
-    }
+    
     complete(key) {
         firebaseDataComplete.push({key});
         this.props.deleteGoal(key);
         firebaseData.child(key).remove();
     }
+
+    componentDidMount() {
+        firebaseData.on('value', snap => {
+            let goalList = [];
+            snap.forEach(goals => {
+                let value = goals.val();
+                let key = goals.key
+                goalList.push({value, key});
+                });
+            console.log(goalList)  
+        })
+    }
+    
     
     render() {
        //console.log(this.props)
         return (
             <div>
                 <div>
-                    {this.showGoals()}
+                    {this.props.goal.map((item,index) => {
+                       return (
+                        <div key={index}>
+                        <h3>{item.goal.goal}</h3>
+                        <Button bsStyle='success' onClick={()=>this.complete(item.key)}>Complete Goal</Button>
+                        </div>
+                    ) 
+                    })}
                 </div>
             </div>
         )
@@ -43,7 +52,7 @@ class GoaList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.UserGoalList)
+    //console.log(state.UserGoalList)
     return {
         goal: state.UserGoalList
     }

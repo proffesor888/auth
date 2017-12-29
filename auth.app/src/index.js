@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Route, Router, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import store from './store';
-import 'D:/React/auth/auth/auth.app/node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'E:/React/auth/auth.app/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {firebaseApp} from './firebase';
 import App from './components/App';
 import User from './components/user';

@@ -18,27 +18,9 @@ class User extends Component {
     subGoal() {
       const goal = this.state.goal;
       const email = this.props.email.UserObj.login;
-      //this.props.addGoal(this.state.goal);
-      //console.log(this.props);
       firebaseData.push({goal, email});
-      //this.props.addGoal(goal);
-
-    }
-    componentDidMount() {
-        firebaseData.on('value', snap => {
-            let goalList = {};
-            snap.forEach(goals => {
-                //console.log(goals);
-                goalList.value = goals.val();
-                goalList.key = goals.key
-                //goal.value = goals.val();
-                //goal.key = goals.key;
-                this.props.addGoal(goalList);
-                });
-            
-        })
-    }
-  
+    }     
+ 
     render() {
       return (
         <div>
@@ -47,7 +29,7 @@ class User extends Component {
             <FormControl type='text' placeholder='enter goal' onChange={event=> this.setState({goal: event.target.value})}></FormControl>
             <Button onClick={() => this.subGoal()}>Submit Goal</Button>
           </FormGroup>
-          <GoaList/>
+          <GoaList items={this.list}/>
           <Button onClick={()=> this.out()}>Sign out</Button>
         </div>
       )
