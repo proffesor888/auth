@@ -3,6 +3,7 @@ import {Button, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {firebaseApp, firebaseData} from '../firebase';
 import GoaList from '../components/GoaList';
+import FinishedGoals from '../components/FinishedGoals';
 import {addGoal} from '../actions/actions';
 
 class User extends Component {
@@ -34,6 +35,8 @@ class User extends Component {
             <Button onClick={() => this.subGoal()}>Submit Goal</Button>
           </FormGroup>
           <GoaList/>
+          <p>Finished Goals:</p>
+          <FinishedGoals/>
           <Button onClick={()=> this.out()}>Sign out</Button>
         </div>
       )

@@ -13,8 +13,8 @@ class GoaList extends Component {
         }
     }
     
-    complete(key) {
-        firebaseDataComplete.push({key});
+    complete(key, goal, email) {
+        firebaseDataComplete.push({key, goal, email});
         this.props.deleteGoal(key);
         firebaseData.child(key).remove();
     }
@@ -40,8 +40,8 @@ class GoaList extends Component {
                     {this.props.goal.map((item, index) => {
                         return (
                             <div key={index}>
-                                <h3>{item.value.goal}</h3>
-                                <Button bsStyle='success' onClick={()=>this.complete(item.key)}>Complete Goal</Button>
+                                <h3>{item.value.goal} submitted by {item.value.email}</h3>
+                                <Button bsStyle='success' onClick={()=>this.complete(item.key, item.value.goal, item.value.email)}>Complete Goal</Button>
                             </div>
                         )
                     })}

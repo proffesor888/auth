@@ -4,8 +4,6 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {logUser} from '../actions/actions';
 import User from '../components/user';
-import Reg from '../components/reg';
-import Form from '../components/form';
 import {firebaseApp} from '../firebase';
 
 
