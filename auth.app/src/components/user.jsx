@@ -3,6 +3,7 @@ import {Button, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {firebaseApp, firebaseData} from '../firebase';
 import GoaList from '../components/GoaList';
+import FinishedGoals from '../components/FinishedGoals';
 import {addGoal} from '../actions/actions';
 
 class User extends Component {
@@ -19,8 +20,8 @@ class User extends Component {
       const goal = this.state.goal;
       const email = this.props.email.UserObj.login;
       firebaseData.push({goal, email});
-    }     
- 
+    }
+      
     render() {
       return (
         <div>
@@ -29,7 +30,9 @@ class User extends Component {
             <FormControl type='text' placeholder='enter goal' onChange={event=> this.setState({goal: event.target.value})}></FormControl>
             <Button onClick={() => this.subGoal()}>Submit Goal</Button>
           </FormGroup>
-          <GoaList items={this.list}/>
+          <GoaList/>
+          <p>Finished Goals:</p>
+          <FinishedGoals/>
           <Button onClick={()=> this.out()}>Sign out</Button>
         </div>
       )

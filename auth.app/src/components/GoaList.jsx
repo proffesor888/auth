@@ -13,37 +13,37 @@ class GoaList extends Component {
         }
     }
     
-    complete(key) {
-        firebaseDataComplete.push({key});
+    complete(key, goal, email) {
+        firebaseDataComplete.push({key, goal, email});
         this.props.deleteGoal(key);
         firebaseData.child(key).remove();
     }
-
     componentDidMount() {
         firebaseData.on('value', snap => {
             let goalList = [];
             snap.forEach(goals => {
+                //console.log(goals);
                 let value = goals.val();
                 let key = goals.key
                 goalList.push({value, key});
                 });
-            console.log(goalList)  
+            this.props.addGoal(goalList);
         })
     }
-    
     
     render() {
        //console.log(this.props)
         return (
             <div>
                 <div>
-                    {this.props.goal.map((item,index) => {
-                       return (
-                        <div key={index}>
-                        <h3>{item.goal.goal}</h3>
-                        <Button bsStyle='success' onClick={()=>this.complete(item.key)}>Complete Goal</Button>
-                        </div>
-                    ) 
+                    
+                    {this.props.goal.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <h3>{item.value.goal} submitted by {item.value.email}</h3>
+                                <Button bsStyle='success' onClick={()=>this.complete(item.key, item.value.goal, item.value.email)}>Complete Goal</Button>
+                            </div>
+                        )
                     })}
                 </div>
             </div>

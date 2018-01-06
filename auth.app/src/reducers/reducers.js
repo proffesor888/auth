@@ -1,4 +1,4 @@
-import {CREATE_USER,LOGIN_USER, ADD_GOAL, COMPLETE_GOAL} from '../constants/constants';
+import {CREATE_USER,LOGIN_USER, ADD_GOAL, COMPLETE_GOAL, FINISHED_GOAL} from '../constants/constants';
 
 
 /*export const UsersMas = (state=[], action) => {
@@ -36,9 +36,8 @@ export const UserObj = (state={}, action) => {
 export const UserGoalList = (state = [], action) => {
     switch (action.type) {
         case ADD_GOAL:
-        return (
-            [...state,UserGoal({}, action)]
-        )
+        let {goal} = action;
+        return goal;
         break;
         case COMPLETE_GOAL:
         return (
@@ -50,7 +49,18 @@ export const UserGoalList = (state = [], action) => {
     } 
 }
 
-const UserGoal = (state = {}, action) => {
+export const FinishedList = (state = [], action) => {
+    switch (action.type) {
+        case FINISHED_GOAL:
+            let {goal} = action;
+            return goal;
+            break;
+        default:
+            return state;
+    }
+}
+
+/*const UserGoal = (state = {}, action) => {
     switch (action.type) {
         case ADD_GOAL:
         return {
@@ -61,4 +71,4 @@ const UserGoal = (state = {}, action) => {
         default:
         return state;
     }
-}
+} */
